@@ -43,14 +43,20 @@
     cropController.toolbarHidden = YES;
     cropController.rotationEnabled = NO;
     
-    CGFloat fixedWidth = options[@"fixedWidth"] ?: width;
-    CGFloat fixedHeight = options[@"fixedHeight"] ?: height;
+    id fixedWidth = options[@"fixedWidth"] ?: @0;
+    id fixedHeight = options[@"fixedHeight"] ?: @0;
     
-    // TODO parameterize this
-    cropController.imageCropRect = CGRectMake((width - length) / 2,
-                                          (height - length) / 2,
-                                          fixedWidth,
-                                          fixedHeight);
+    if([fixedWidth unsignedDoubleValue] != 0 && [fixedHeight unsignedDoubleValue] != 0) {
+        cropController.imageCropRect = CGRectMake((width - length) / 2,
+                                                  (height - length) / 2,
+                                                  [fixedWidth unsignedDoubleValue],
+                                                  [fixedHeight unsignedDoubleValue]);
+    } else {
+        cropController.imageCropRect = CGRectMake((width - length) / 2,
+                                                  (height - length) / 2,
+                                                  length,
+                                                  length);
+    }
     
     self.callbackId = command.callbackId;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cropController];
