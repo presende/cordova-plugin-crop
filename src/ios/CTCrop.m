@@ -46,11 +46,11 @@
     id fixedWidth = options[@"fixedWidth"] ?: @0;
     id fixedHeight = options[@"fixedHeight"] ?: @0;
     
-    if([fixedWidth unsignedDoubleValue] != 0 && [fixedHeight unsignedDoubleValue] != 0) {
+    if([fixedWidth unsignedIntegerValue] != 0 && [fixedHeight unsignedIntegerValue] != 0) {
         cropController.imageCropRect = CGRectMake((width - length) / 2,
                                                   (height - length) / 2,
-                                                  [fixedWidth unsignedDoubleValue],
-                                                  [fixedHeight unsignedDoubleValue]);
+                                                  [fixedWidth unsignedIntegerValue],
+                                                  [fixedHeight unsignedIntegerValue]);
     } else {
         cropController.imageCropRect = CGRectMake((width - length) / 2,
                                                   (height - length) / 2,
